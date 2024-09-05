@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Loginpage from "./Components/Loginpage";
+import Userhome from "./Components/Userhome";
+import Adminhome from "./Components/Adminhome";
+import { UseUserContext } from "./Hooks/UseUserContext";
+import { UseAdminContext } from "./Hooks/UseAdminContext";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 function App() {
+  const { User } = UseUserContext();
+  console.log(User);
+  const { Admin } = UseAdminContext();
+  console.log(Admin);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={!Admin && !User ? <Loginpage /> : <Navigate to='/Adminpage' />}></Route>
+          <Route path='/Adminpage' element={Admin ? <Adminhome/> : <Navigate to='/Userpage'/>}></Route>
+          <Route path='/Userpage' element={User ? <Userhome/> :<Navigate to ='/'/>}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
