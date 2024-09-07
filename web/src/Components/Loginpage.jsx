@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { UseAdminLogin } from '../Hooks/UseAdminLogin';
 import { UseUserLogin } from '../Hooks/UseUserLogin';
 import { UseUserLogout } from '../Hooks/UseUserLogout';
+import { Link } from 'react-router-dom';
 const Loginpage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -65,6 +66,7 @@ const Loginpage = () => {
           </div>
           <input type="submit" value="Login" />
         </form>
+        <p>Don't have an account<Link to = '/user/signup'>Signup</Link></p>
       </main>
       {error && <div >{error}</div>}
       {usererror && <div >{usererror}</div>}
